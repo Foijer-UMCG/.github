@@ -1,19 +1,22 @@
-name: Auto Assign
+name: Auto-assign new issues
+
 on:
   issues:
     types: [opened]
-  pull_request:
-    types: [opened]
+
 jobs:
-  run:
+  auto-assign:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      pull-requests: write
     steps:
-    - name: 'Auto-assign issue'
-      uses: pozil/auto-assign-issue@v1
-      with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          assignees: Kaam-umcg
-          numOfAssignee: 1
+      - name: Assign issue to user
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const assignee = Kaam-umcg
+            await github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              assignees: [assignee]
+            });
