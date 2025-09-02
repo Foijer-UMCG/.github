@@ -10,7 +10,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const assignee = Kaam-umcg;
+            const assignee = "Kaam-umcg";
             await github.rest.issues.addAssignees({
               owner: context.repo.owner,
               repo: context.repo.repo,
