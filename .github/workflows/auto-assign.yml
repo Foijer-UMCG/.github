@@ -2,9 +2,6 @@ name: Org auto-assign issues
 on:
   workflow_call:   # allows other repos to call this workflow
   
-permissions:
-  issues: write
-  
 jobs:
   auto-assign:
     runs-on: ubuntu-latest
